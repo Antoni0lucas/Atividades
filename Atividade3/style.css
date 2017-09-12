@@ -44,19 +44,22 @@ article{
 
 .artigo1{
     padding: 20px;
+    margin: 0 0 0 150px;
     color: white;
 }
 .artigo2{
+    margin: 0 0 0 150px;
     color: white;
     border: 0.1vw dashed rgb(255, 0, 0);
     padding: 2px;
 }
 
 .artigo3{
-    padding: 30px;
+    margin: 0 0 0 150px;
     color: white;
 }
 .artigo4{
+    margin: 0 0 0 150px;
     color: white;
       
 }
