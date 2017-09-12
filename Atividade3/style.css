@@ -43,31 +43,31 @@ article{
 }
 
 .artigo1{
-    margin: 20px;
+    padding: 20px;
+    margin: 0 0 0 150px;
     color: white;
 }
 .artigo2{
-    margin: 20px;
+    margin: 0 0 0 150px;
     color: white;
     border: 0.1vw dashed rgb(255, 0, 0);
     padding: 2px;
 }
 
 .artigo3{
-    margin: 10px;
+    margin:50px;
+    padding: 30px;
     color: white;
 }
 .artigo4{
-    margin: 20px;
+    margin: 0 0 0 200px;
     color: white;
-    
+      
 }
 form{
+    margin: 40px;
     border: 1px solid blanchedalmond;
     background-color: #3C3C3C;
     padding: 10px;
-    position: absolute;
-    top: 250px;
-    right: 300px;
     
 }
