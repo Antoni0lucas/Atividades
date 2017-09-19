@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+header{
+    font-family: "Century Gothic";
+    font-size: 15px;
+    margin: 5px;
+}
+.nave {
+    overflow: hidden;
+    background-color: #4CAF50;
+    position: relative;
+    top: 0;
+    width: 100%;
+}
+.nave ul{
+    list-style: none;
+}
+
+.nave > ul> li> a:hover, .drop .button{
+    display: block;
+    text-decoration: none;
+    color: white;
+    float:left;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.drop{
+    float: left;
+}
+
+.drop-conteudo{
+    position: absolute;
+    background-color: #ddd;
+    width: 150px;
+    display: none;
+}
+
+.drop:hover .drop-conteudo{
+    display: block;
+}
+
+.drop .drop-button{
+    float:none;
+}
+
+.nave > ul > li > a:hover, .drop .button:hover{
+    background-color: #ccc;
+}
+
+.drop-conteudo > ul{
+    list-style: none;
+}
+
+.drop-conteudo > ul > li > a{
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.drop-conteudo > ul > li > a:hover{
+    background-color: #ccc;
+}
+
