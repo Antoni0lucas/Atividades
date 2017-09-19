@@ -6,19 +6,18 @@ header{
     font-family: "Century Gothic";
     font-size: 15px;
     margin: 5px;
+    position: relative;
 }
 .nave {
-    overflow: hidden;
+    overflow: auto;
     background-color: #4CAF50;
-    position: relative;
-    top: 0;
     width: 100%;
 }
 .nave ul{
     list-style: none;
 }
 
-.nave > ul> li> a:hover, .drop .button{
+.nave > ul> li> a, .drop .button{
     display: block;
     text-decoration: none;
     color: white;
@@ -32,36 +31,83 @@ header{
 }
 
 .drop-conteudo{
+    font-family: Verdana, sans-serif;
     position: absolute;
-    background-color: #ddd;
-    width: 150px;
+    background-color: #EEEEEE;
     display: none;
+    left: 0;
 }
-
+.drop-conteudo div{
+    display: table;
+}
 .drop:hover .drop-conteudo{
     display: block;
 }
 
-.drop .drop-button{
-    float:none;
+.drop-conteudo{
+    width: 100%;
+}
+
+.drop .button{
+    float: none;
+        
 }
 
 .nave > ul > li > a:hover, .drop .button:hover{
-    background-color: #ccc;
+    background-color: #ffffff;
+    color: black;
 }
 
+.drop-conteudo h3{
+    margin: 10px;
+    margin-top: 30px;
+}
 .drop-conteudo > ul{
     list-style: none;
+    margin: 5px;
 }
 
 .drop-conteudo > ul > li > a{
     display: block;
-    padding: 10px;
+    padding: 5px;
     text-decoration: none;
     color: black;
+    margin: 5px;
 }
 
 .drop-conteudo > ul > li > a:hover{
-    background-color: #ccc;
+    background-color: #ddd;
 }
 
+.button{
+    font-family: Verdana, sans-serif;
+}
+.nav-late{
+    font-family: Verdana, sans-serif;
+    margin: 15px;
+    float: left;
+}
+
+.nav-late > ul{
+    display: inline-block;
+    list-style: none;
+    
+}
+.nav-late >ul > h4 {
+    margin-top: 15px;
+    font-size: 19px;
+    font-weight: normal;
+}
+
+.nav-late > ul > li > a {  
+    text-decoration: none;
+    display: block;
+    float: left;
+    color: black;
+    
+}
+
+.nav-late ul li a:hover{
+    background-color: #ccc;
+
+}
