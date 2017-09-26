@@ -114,7 +114,10 @@ header{
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
-
+@keyframes rodar {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg)}
+}
 .conteudo{
     width: 55vw;
     float: left;
@@ -141,3 +144,6 @@ header{
         transform: rotate(360deg)}
 }
 
+@media screen {
+    
+}
