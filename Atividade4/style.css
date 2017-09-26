@@ -8,6 +8,12 @@ header{
     margin: 5px;
     position: relative;
 }
+
+.logo{
+    max-height: 300px;
+    max-height: 200px;
+    
+}
 .nave {
     overflow: auto;
     background-color: #4CAF50;

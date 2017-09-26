@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    font-family: Century Gothic;
+    background-color: #aaaaaa;
+    box-shadow: 2px 0px 5px  rgba(0, 0, 0, 0.50);
+}
+
+.logo{
+    padding: 15px;
+    max-height: 300px;
+    max-width: 200px;
+}
+
+.nav-superior{
+    background-color: #dddddd;
+    overflow: auto;
+    
+}
+.nav-superior ul{
+    list-style: none;
+}
+
+.nav-superior ul li a:hover, .dropdow .button:hover{
+    background-color: blue;
+}
+
+.nav-superior ul  li a, .dropdow .button{
+    text-decoration:none;   
+    color: #A40B0B;
+    position: relative;
+}
+
+.drop-conteudo ul li a{
+    display: block;
+    padding: 5px 20px;
+    
+}
+.dropdow{
+    float: left;
+}
+.dropdow .button{
+    float: none;
+    padding: 15px;
+}
+.drop-conteudo{
+    font-family: Verdana, sans-serif;
+    position: absolute;
+    background-color: hotpink;
+    overflow: hidden;
+    max-height: 0;
+    width: 150px;
+    transition: max-height 300ms;
+
+}
+.dropdow:hover .drop-conteudo{
+    overflow: visible;
+    max-height: 1000px;
+}
+
+.nav-lateral{
+    font-family: Century Gothic;
+    float: left;
+    width: 15vw;
+    height: 100vh;
+    background:linear-gradient(#ccc, #fff) ;
+    box-shadow: 2px 0px 5px  rgba(0, 0, 0, 0.50);
+    position: relative;
+    z-index: -10;
+}
+
+.nav-lateral ul{
+    list-style: none;
+}
+.nav-lateral ul li a{
+    padding: 10px;
+    padding-left: 20px;
+    display: block;
+    text-decoration: none;
+}
+
+.nav-lateral ul li a:hover{
+    background-color: blue;
+}
+.nav-lateral h4{
+    padding: 10px;
+}
+
+.direita{
+    float: right;
+    text-align: center;
+    width: 15vw;
+    height: 100vh;
+    position: relative;
+    z-index: -10;
+}
+
+.direita h4, p{
+    font-family: Century Gothic;
+    padding: 10px;
+}
+
+.loading{
+    width: 50px;
+    height: 50px;
+    border: 5px solid #000000;
+    border-radius: 50%;
+    border-bottom: 5px solid #aaaaaa;
+    animation: rodar;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.conteudo{
+    float: left;
+    padding: 10px;
+    position: relative;
+    animation: animar 4s infinite alternate;
+    animation-timing-function: linear;
+   
+}
+.conteudo img{
+    height: 100px;
+    width: 60px;
+}
+
+@keyframes animar {
+    from {left: 30px;
+        transform: rotate(0deg);}
+    to {left: 50%;
+        transform: rotate(360deg)}
+}
+
