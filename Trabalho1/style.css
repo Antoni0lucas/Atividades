@@ -116,22 +116,28 @@ header{
 }
 
 .conteudo{
+    width: 55vw;
+    float: left;
+    padding: 10px;
+}
+
+.groot{
     float: left;
     padding: 10px;
     position: relative;
     animation: animar 4s infinite alternate;
     animation-timing-function: linear;
-   
+
 }
-.conteudo img{
+.groot img{
     height: 100px;
     width: 60px;
 }
 
 @keyframes animar {
-    from {left: 30px;
+    from {left: 0;
         transform: rotate(0deg);}
-    to {left: 50%;
+    to {left: 100%;
         transform: rotate(360deg)}
 }
 
