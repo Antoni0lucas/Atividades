@@ -64,12 +64,12 @@ header{
 .nav-lateral{
     font-family: Century Gothic;
     float: left;
-    width: 15vw;
-    height: 100vh;
     background:linear-gradient(#ccc, #fff) ;
     box-shadow: 2px 0px 5px  rgba(0, 0, 0, 0.50);
     position: relative;
     z-index: -10;
+    height: 100%;
+    width: 100vw;
 }
 
 .nav-lateral ul{
@@ -106,6 +106,8 @@ header{
 .loading{
     width: 50px;
     height: 50px;
+    margin: auto;
+    margin-bottom: 5px;
     border: 5px solid #000000;
     border-radius: 50%;
     border-bottom: 5px solid #aaaaaa;
@@ -144,6 +146,10 @@ header{
         transform: rotate(360deg)}
 }
 
-@media screen {
-    
+@media screen and (min-width: 600px) {
+    .nav-lateral{
+        float: left;
+        width: 15vw;
+        height: 100vh;
+    }
 }
