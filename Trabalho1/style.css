@@ -93,9 +93,11 @@ header{
 
 .direita{
     box-shadow: 0px 5px 5px  rgba(0, 0, 0, 0.50);
+    z-index: 100;
 }
 
 .direita h4, p{
+    text-align: center;
     font-family: Verdana, sans-serif;
     padding: 10px;
 }
@@ -119,6 +121,7 @@ header{
 }
 .conteudo{
     font-family: Verdana, sans-serif;
+   
 }
 
 .groot{
@@ -149,7 +152,6 @@ header{
         position: relative;
     }
     .conteudo{
- 
         width: 55vw;
         float: left;
         padding: 10px;
@@ -158,10 +160,8 @@ header{
         float: right;
         text-align: center;
         width: 15vw;
-        height: 100vh;
+        height: 0vh;
         position: relative;
         z-index: -10;
     }
-
-
 }
