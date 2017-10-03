@@ -4,7 +4,7 @@
 }
 
 header{
-    font-family: Century Gothic;
+    font-family: c;
     background-color: #aaaaaa;
     box-shadow: 2px 0px 5px  rgba(0, 0, 0, 0.50);
 }
@@ -14,23 +14,25 @@ header{
     max-height: 300px;
     max-width: 200px;
 }
-
+.logo > h1{
+    font-family: Verdana, sans-serif;
+}
 .nav-superior{
+    font-family: Verdana, sans-serif;
     background-color: #dddddd;
     overflow: auto;
-    
 }
 .nav-superior ul{
     list-style: none;
 }
 
 .nav-superior ul li a:hover, .dropdow .button:hover{
-    background-color: blue;
+    background-color: #aaaaaa;
 }
 
 .nav-superior ul  li a, .dropdow .button{
     text-decoration:none;   
-    color: #A40B0B;
+    color: #000000;
     position: relative;
 }
 
@@ -49,7 +51,7 @@ header{
 .drop-conteudo{
     font-family: Verdana, sans-serif;
     position: absolute;
-    background-color: hotpink;
+    background-color: #aaaaaa;
     overflow: hidden;
     max-height: 0;
     width: 150px;
@@ -62,7 +64,7 @@ header{
 }
 
 .nav-lateral{
-    font-family: Century Gothic;
+    font-family: Verdana, sans-serif;
     float: left;
     background:linear-gradient(#ccc, #fff) ;
     box-shadow: 2px 0px 5px  rgba(0, 0, 0, 0.50);
@@ -80,10 +82,11 @@ header{
     padding-left: 20px;
     display: block;
     text-decoration: none;
+    color: #000000;
 }
 
 .nav-lateral ul li a:hover{
-    background-color: blue;
+    background-color: #aaaaaa;
 }
 .nav-lateral h4{
     padding: 10px;
@@ -99,7 +102,7 @@ header{
 }
 
 .direita h4, p{
-    font-family: Century Gothic;
+    font-family: Verdana, sans-serif;
     padding: 10px;
 }
 
@@ -124,6 +127,7 @@ header{
     width: 55vw;
     float: left;
     padding: 10px;
+    font-family: Verdana, sans-serif;
 }
 
 .groot{
