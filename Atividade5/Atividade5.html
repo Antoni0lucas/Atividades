@@ -75,7 +75,7 @@
             <h1>Minha página</h1>
         </nav>
     </header>
-    <button class="but-menu">&#9776</button>
+    <button class="but-menu" onclick="AF()">&#9776</button>
     <nav class="nav-lateral">
         <ul>
             <li><a href="">Link</a></li>
@@ -87,16 +87,21 @@
         let botão = document.querySelector(".but-menu");
         let navLateral = document.querySelector(".nav-lateral");
 
-        // botão.addEventListener('click', function() {
-        //     navLateral.style.display = "block";
-        // })
+        function AF() {
+            if (navLateral.style.display == "block") {
+                fechar();
+            } else {
+                abrir();
+            }
+        }
+
         function abrir() {
             navLateral.style.display = "block";
         }
 
-        botão.addEventListener("click", function() {
-            abrir();
-        });
+        function fechar() {
+            navLateral.style.display = "none";
+        }
     </script>
 </body>
 
