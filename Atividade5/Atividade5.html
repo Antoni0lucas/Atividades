@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-superior {
+            background-color: #aaaaaa;
+            padding: 10px;
+            position: relative;
+        }
+        
+        .nav-lateral {
+            display: block;
+            float: left;
+            position: relative;
+            background-color: rgb(212, 212, 212);
+            border: 1px solid rgb(190, 190, 190);
+            height: 100vh;
+            width: 200px;
+        }
+        
+        .nav-lateral ul li {
+            padding: 5px;
+        }
+        
+        .nav-lateral ul {
+            list-style: none;
+        }
+        
+        .nav-lateral ul li a {
+            text-decoration: none;
+        }
+        
+        .but-menu {
+            display: none;
+        }
+        
+        @media screen and (max-width:480px) {
+            .but-menu {
+                display: block;
+                position: fixed;
+                top: 0;
+                padding: 5px;
+                font-size: 28px;
+                cursor: pointer;
+                background-color: #aaaaaa;
+                border: none;
+                outline: none;
+            }
+            .nav-lateral {
+                display: none;
+            }
+            .nav-superior {
+                display: inline-block;
+                width: 100%;
+                left: 35px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-superior">
+            <h1>Minha página</h1>
+        </nav>
+    </header>
+    <button class="but-menu">&#9776</button>
+    <nav class="nav-lateral">
+        <ul>
+            <li><a href="">Link</a></li>
+            <li><a href="">Link</a></li>
+            <li><a href="">Link</a></li>
+        </ul>
+    </nav>
+    <script>
+        let botão = document.querySelector(".but-menu");
+        let navLateral = document.querySelector(".nav-lateral");
+
+        // botão.addEventListener('click', function() {
+        //     navLateral.style.display = "block";
+        // })
+        function abrir() {
+            navLateral.style.display = "block";
+        }
+
+        botão.addEventListener("click", function() {
+            abrir();
+        });
+    </script>
+</body>
+
+</html>
