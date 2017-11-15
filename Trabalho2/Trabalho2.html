@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            padding: 20px;
+        }
+        
+        .pagina {
+            width: 900px;
+            margin: auto;
+            height: 100vh;
+            border: 1px solid rgba(0, 0, 0, .20);
+            background-color: #ffffff;
+        }
+        
+        .pagina .header {
+            height: 50px;
+            box-sizing: border-box;
+            background-color: rgb(114, 104, 255)
+        }
+        
+        .pagina .header .nome-chat {
+            float: left;
+            width: 240px;
+            height: 100%;
+        }
+        
+        .pagina .header .botao-login {
+            float: right;
+            width: 110px;
+            height: 100%;
+            margin-top: 7px;
+            text-align: center;
+        }
+        
+        .botao {
+            width: 50px;
+            height: 30px;
+            cursor: pointer;
+            outline: none;
+            background-color: #cccccc;
+        }
+        
+        .botao:hover {
+            background-color: #ffffff;
+        }
+        
+        .addgrupo {
+            float: left;
+            border: 2px solid rgb(255, 0, 0);
+            background-color: rgb(255, 255, 0);
+            cursor: pointer;
+        }
+        
+        .pagina .header .grupo-nome {
+            width: 548px;
+            float: left;
+            height: 100%;
+            text-align: center;
+            line-height: 50px;
+        }
+        
+        .form-grupo {
+            display: none;
+        }
+        
+        .grupos {
+            float: left;
+            box-shadow: 2px 0px 4px #cccccc;
+            width: 230px;
+            height: calc(100vh - 50px);
+            z-index: 1;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+        
+        .grupo {
+            cursor: pointer;
+            display: block;
+            overflow: auto;
+            width: 230px;
+        }
+        
+        .lista-grupos {
+            float: left;
+            overflow: auto;
+            z-index: 1;
+        }
+        
+        .lista-grupos .grupo.active {
+            background-color: rgb(9, 0, 139);
+        }
+        
+        .lista-grupos .grupo:hover {
+            background-color: rgb(93, 81, 255);
+        }
+        
+        .grupos .lista-grupos .grupo .icone {
+            border-radius: 50%;
+            float: left;
+            width: 40px;
+            height: 40px;
+            padding: 10px;
+        }
+        
+        .grupos .lista-grupos .grupo .nome {
+            color: black;
+        }
+        
+        .mensagens {
+            width: 658px;
+            box-sizing: border-box;
+            padding: 10px;
+            float: left;
+            overflow: auto;
+            height: calc(100vh - 50px);
+        }
+        
+        .mensagens .mensagem {
+            display: block;
+            margin-right: 50px;
+        }
+        
+        .mensagens .mensagem>.mensagem-container {
+            margin-bottom: 3px;
+            border-radius: 10px;
+            height: auto;
+            font-size: 12px;
+            display: inline-block;
+            background-color: #ccc;
+        }
+        
+        .mensagens .mensagem .nome-contato {
+            padding: 5px 15px 2px 9px;
+            color: white;
+        }
+        
+        .mensagens .mensagem .mensagem-contato {
+            padding: 0px 10px 2px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pagina">
+        <header class="header">
+            <div class="nome-chat"><span>Chat</span></div>
+            <div class="botao-login"><button class="botao">Entrar</button></div>
+            <div class="grupo-nome"></div>
+        </header>
+
+        <!-- <div class="form">
+            <form action="" id="form-login">
+                <label for="id">Digite seu ID:</label>
+                <input type="text" id="id">
+                <br>
+                <div class="botao-login"><button type="submit" class="botao">Entrar</button></div>
+                </form>
+            </div>
+        </div>  -->
+
+        <div class="grupos">
+            <span class="addgrupo">Add Grupo</span>
+            <br>
+            <br>
+            <div class="form-grupo">
+                <form>
+                    <label for="nome-grupo">Nome do Grupo:</label>
+                    <br>
+                    <input type="text" id="nome-grupo">
+                    <br>
+                    <label for="id-grupo">ID do Grupo:</label>
+                    <br>
+                    <input type="text" id="id-grupo">
+                    <br>
+                    <button class="botaoAdd">Cadastro</button>
+                </form>
+            </div>
+
+            <div class="lista-grupos">
+
+            </div>
+
+        </div>
+
+        <div class="mensagens">
+            <div class "mensagem">
+            </div>
+        </div>
+        <div class="enviar-mensagem">
+            <form action="">
+                <input type="text" id="campo-mensagem">
+                <input type="submit" id="enviar-mensagem">
+            </form>
+        </div>
+
+
+    </div>
+
+    <script>
+        function updateMensagens() {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4) {
+                    grupoNomeSelec.innerHTML = " ";
+                    mensagens.innerHTML = "";
+                    let objeto = JSON.parse(xhttp.responseText);
+                    for (let i = 0; i < objeto.length; i++) {
+                        mensagemHTML(objeto[i].nomeUsuario, objeto[i].mensagem);
+                    }
+                };
+            };
+            xhttp.open("GET", "http://rest.learncode.academy/api/lucas/grupos", true);
+            xhttp.send();
+
+        }
+        let grupo = document.querySelector(".form-grupo");
+
+        localStorage.idUsuario = "usuario";
+
+        let campoMensagem = document.querySelector("#campo-mensagem")
+        let btEnviarMsg = document.querySelector("#enviar-mensagem");
+        let id = grupo.grupoID;
+        btEnviarMsg.addEventListener("click", function(a) {
+            a.preventDefault();
+            let conteudoMensagem = {
+                "mensagem": campoMensagem.value,
+                "nomeUsuario": localStorage.idUsuario
+            };
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4) {
+                    updateMensagens();
+                };
+            };
+            xhttp.open("POST", "http://rest.learncode.academy/api/lucas/" + id, true);
+            xhttp.setRequestHeader("content-type", "application/json");
+            xhttp.send(JSON.stringify(conteudoMensagem));
+        });
+        let mensagens = document.querySelector(".mensagens");
+        let grupoNomeSelec = document.querySelector(".grupo-nome");
+
+        function mensagemHTML(usuario, texto) {
+            let mensagem = document.createElement("div");
+            let tituloMensagem = document.createElement("span");
+            let conteudoMensagem = document.createElement("p");
+
+            let textoUsuario = document.createTextNode(usuario);
+            let textoMensagem = document.createTextNode(texto);
+
+
+            tituloMensagem.appendChild(textoUsuario);
+            conteudoMensagem.appendChild(textoMensagem);
+
+            mensagem.appendChild(tituloMensagem);
+            mensagem.appendChild(conteudoMensagem);
+            mensagens.appendChild(mensagem);
+        }
+
+        function mostrarMensagens(grupo) {
+            let nome = grupo.grupoNome;
+            let id = grupo.grupoID;
+            let textoGrupoNome = document.createTextNode(nome);
+            grupoNomeSelec.innerHTML = "";
+            mensagens.innerHTML = "";
+
+            grupoNomeSelec.appendChild(textoGrupoNome);
+            console.log(grupoNomeSelec);
+
+            let xhttp2 = new XMLHttpRequest();
+            xhttp2.onreadystatechange = function() {
+                if (xhttp2.readyState == 4) {
+                    let objeto = JSON.parse(xhttp2.responseText);
+
+                    for (let i = 0; i < objeto.length; i++) {
+                        let contato = objeto[i].usuario;
+                        let msg = objeto[i].mensagem;
+                        let mensagem = document.createElement("div");
+                        let container = document.createElement("div")
+                        let nomeContato = document.createElement("div");
+                        let mensageContato = document.createElement("div");
+                        let nome = document.createElement("span");
+                        let mensagemSpan = document.createElement("span");
+                        let textoNome = document.createTextNode(contato);
+                        let textoMensagem = document.createTextNode(msg);
+
+                        nome.appendChild(textNome);
+                        messageSpan.appendChild(textoMensagem);
+                        nomeContato.appendChild(nome);
+                        nomeContato.classList.add("nome-contato");
+                        messageContact.appendChild(messageSpan);
+                        mensagemContato.classList.add("mensagem-contato");
+                        container.appendChild(nameContato);
+                        container.appendChild(mensageContato);
+                        container.classList.add("mensagem-container")
+                        mensagem.appendChild(container);
+                        mensagem.classList.add("mensagem");
+
+                        mensagens.appendChild(mensagem);
+                    }
+                };
+            };
+            xhttp2.open("GET", "http://rest.learncode.academy/api/lucas/" + id, true);
+            xhttp2.send();
+        }
+        updateMensagens();
+
+        // let nomeGrupoSelec = document.querySelector(".grupo-nome");
+
+        // function mostrarNomeGrupo(grupo) {
+
+        //     let grupoNome = grupo.nomeGrupo;
+        //     let id = grupo.idGrupo;
+        //     let texto = document.createTextNode(grupoNome);
+
+        //     grupo.innerHTML = "";
+        //     nomeGrupoSelec.innerHTML = "";
+
+        //     nomeGrupoSelec.appendChild(texto);
+        //     console.log(grupoNome);
+        //     xhttp.open("GET", "http://rest.learncode.academy/api/lucas/" + id, true);
+        //     xhttp.send();
+        // }
+
+
+        let botaoAdd = document.querySelector(".addgrupo");
+        let grupo = document.querySelector(".form-grupo");
+
+        botaoAdd.addEventListener("click", function() {
+            grupo.style.display = "block";
+        });
+        let campoNomeGrupo = document.querySelector("#nome-grupo");
+        let campoIdGrupo = document.querySelector("#id-grupo");
+
+        let botao = document.querySelector(".botaoAdd");
+        botao.addEventListener("click", function(e) {
+            e.preventDefault();
+            let dadosDoGrupo = {
+                nomeGrupo: campoNomeGrupo.value,
+                idGrupo: campoIdGrupo.value
+            };
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4) {
+                    updateGrupos();
+                };
+            };
+            xhttp.open("POST", "http://rest.learncode.academy/api/lucas/grupos", true);
+            xhttp.setRequestHeader("content-type", "application/json");
+            xhttp.send(JSON.stringify(dadosDoGrupo));
+        });
+
+        function updateGrupos() {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4) {
+                    listaGrupos.innerHTML = "";
+                    let objeto = JSON.parse(xhttp.responseText);
+                    for (let i = 0; i < objeto.length; i++) {
+                        gruposHTML(objeto[i]);
+                    }
+                };
+            };
+            xhttp.open("GET", "http://rest.learncode.academy/api/lucas/grupos", true);
+            xhttp.send();
+        };
+
+        let grupos = document.querySelector(".grupos");
+        let listaGrupos = document.querySelector(".lista-grupos");
+
+        function gruposHTML(grupo) {
+            let divGrupo = document.createElement("div");
+            let imagem = document.createElement("img");
+            let span = document.createElement("span");
+
+            imagem.src = ("https://cdn.pixabay.com/photo/2016/11/14/17/39/person-1824147_960_720.png");
+
+            textoSpan = document.createTextNode(grupo.nomeGrupo);
+
+            divGrupo.classList.add("grupo");
+            imagem.classList.add("icone");
+            span.classList.add("nome");
+
+            span.appendChild(textoSpan);
+            divGrupo.appendChild(imagem);
+            divGrupo.appendChild(span);
+
+            listaGrupos.appendChild(divGrupo);
+            grupos.appendChild(listaGrupos);
+
+            divGrupo.addEventListener("click", mostrarMensagens);
+        }
+
+        updateGrupos();
+    </script>
+</body>
+
+</html>

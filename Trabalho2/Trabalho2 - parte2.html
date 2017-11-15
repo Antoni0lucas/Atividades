@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta nome="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body{
+            padding: 20px;
+        }
+        
+        .pagina {
+            width: 900px;
+            margin: auto;
+            height: 100vh;
+            border: 1px solid rgba(0, 0, 0, .20);
+            background-color: #ffffff;
+        }
+
+        .pagina .header {
+            height: 50px;
+            box-sizing: border-box;
+            background-color: rgb(114, 104, 255)
+        }
+
+        .pagina .header .nome-chat{
+            float: left;
+            width: 240px;
+            height: 100%;
+        }
+
+        .pagina .header .botao-login{
+            float: right;
+            width: 110px;
+            height: 100%;
+            margin-top:7px;
+            text-align: center;
+        }
+
+        .botao {
+            width: 50px;
+            height: 30px;
+            cursor: pointer;
+            outline: none;
+            background-color: #cccccc;
+        }
+
+        .botao:hover{
+            background-color: #ffffff;
+        }
+
+        .pagina .header .nome-grupo {
+            width: 548px;
+            float: left;
+            height: 100%;
+            text-align: center;
+            line-height: 50px;
+
+        }
+
+        .lista-grupos {
+            float: left;
+            overflow: auto;
+            width: 240px;
+            height: calc(100vh - 50px);
+            z-index: 1;
+            box-sizing: border-box;
+            border-right: 1px solid rgba(0, 0, 0, .30);
+        }
+
+        .lista-grupos .grupo{
+            width: 100%;
+            height: 60px;
+            padding: 5px 10px;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        .lista-grupos .grupo.active{
+            background-color:  rgb(9, 0, 139);
+        }
+
+        .lista-grupos .grupo:hover{
+            background-color:  rgb(93, 81, 255);
+        }
+
+        .lista-grupos .grupo .icon{
+            float: left;
+            width: 50px;
+            margin-right: 9px;
+        }
+
+        .lista-grupos .grupo .icon img{
+            height: 50px;
+            width: 100%;
+            background-color: #bbb;
+        }
+
+        .lista-grupos .grupo .nome{
+            line-height: 50px;
+        }  
+
+        .mensagens{
+            width: 658px;
+            box-sizing: border-box;
+            padding: 10px;
+            float: left;
+            overflow: auto;
+        }
+
+        .mensagens .mensagem{
+            margin-bottom: 1px;
+            box-sizing: border-box;
+        }
+
+        .mensagens .mensagem > .mensagem-container{
+            margin-bottom: 3px;
+            box-sizing: border-box;
+            border-radius: 15px;
+            height: auto;
+            font-size: 14px;
+            display: inline-block;
+            background-color: #ccc;
+        }
+        
+        .mensagens .mensagem .nome-contato{
+            padding: 4px 20px 4px 12px;
+            color: white;
+        }
+        
+        .mensagens .mensagem .mensagem-contato{
+            padding: 0px 20px 4px 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="pagina">
+        <header class="header">
+            <div class="nome-chat"><span>Chat</span></div>
+            <div class="botao-login"><button class="botao">Entrar</button></div>
+            <div class="nome-grupo"><span></span></div>
+        </header>
+        <div class="lista-grupos">
+            </div>
+                <div class="mensagens">
+                    <div class="mensagem">
+                    </div>
+                </div>
+            <div class="enviar-msg">
+                <form action="">
+                    <input type="text" placeholder="Digite uma mensagem">
+                    <button class="enviar">Enviar</button>
+                </form>
+            </div>
+    </div>
+    <script>
+        let mensagens = document.querySelector(".mensagens");
+        let listaGrupos = document.querySelector(".lista-grupos");
+        let nomeGrupo = document.querySelector(".nome-grupo");
+        let grupoHtml = [];
+
+        function showMessages(grupo){
+            let nome = grupo.nomeGrupo;
+            let id = grupo.IDgrupo;
+            let nomeGrupo = document.createTextNode(nome);
+            nomeGrupo.innerHTML = "";
+            mensagens.innerHTML = "";
+
+            nomeGrupo.appendChild(nomeGrupo);
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if(xhttp.readyState==4){
+                    let obj = JSON.parse(xhttp.responseText);
+                    for(let i = 0, size = obj.length; i < size; i++){
+                        let msg = obj[i].mensagem;
+                        let grupo = obj[i].userName;
+                        let mensagem = document.createElement("div");
+                        let container = document.createElement("div")
+                        let nomeContato = document.createElement("div");
+                        let mensagemContato = document.createElement("div");
+                        let nome = document.createElement("span");
+                        let mensagemSpan = document.createElement("span");
+                        let nomeTexto = document.createTextNode(grupo);
+                        let textoMensagem = document.createTextNode(msg);
+
+                        nome.append(nomeTexto);
+                        mensagemSpan.append(textoMensagem);
+                        nomeContato.append(nome);
+                        nomeContato.classList.add("nome-grupo");
+                        mensagemContato.append(mensagemSpan);
+                        mensagemContato.classList.add("mensagem-grupo");
+                        container.append(nomeContato);
+                        container.append(mensagemContato);
+                        container.classList.add("mensagem-container")
+                        mensagem.append(container);
+                        mensagem.classList.add("mensagem");
+
+                        mensagens.append(mensagem);
+                    }
+                }
+            }
+
+            xhttp.open('GET','http://rest.learncode.academy/api/Lucas/'+id, true);
+            xhttp.send();
+
+        }
+
+        function verGrupos(nomeGrupo){
+            let grupo = document.createElement("div");
+            let nome_grupo = document.createElement("span");
+            let icon = document.createElement("div");
+            let img = document.createElement("img");
+            let text = document.createTextNode(nomeGrupo.nomeGrupo);
+
+            img.src = "https://cdn.pixabay.com/photo/2016/11/14/17/39/person-1824147_960_720.png";
+
+            nome_grupo.classList.add("nome");
+            nome_grupo.append(text);
+            grupo.append(nome_grupo);
+            icon.classList.add("icon");
+            icon.append(img);
+            grupo.append(icon);
+            grupo.classList.add("grupo");
+
+            listaGrupos.append(grupo);
+            gruposHtml.push(grupo);
+
+            grupo.addEventListener("click", function(){
+            verMensagens(nomeGrupo);
+
+                for(let i = 0, size = gruposHtml.length; i<size; i++){
+                    gruposHtml[i].classList.remove("active");
+                }
+
+                this.classList.add("active");
+            })
+        }
+
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(xhttp.readyState==4){
+                let obj_parsed = JSON.parse(xhttp.responseText);
+                for(let i=0; i<obj_parsed.length; i++){
+                    verGrupos(obj_parsed[i]);
+                }
+            }
+        }
+        xhttp.open('GET','http://rest.learncode.academy/api/Lucas/grupo', true);
+        xhttp.enviar();
+    </script>
+   
+</body>
+</html>
