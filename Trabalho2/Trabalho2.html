@@ -224,13 +224,12 @@
             xhttp.send();
 
         }
-        let grupo = document.querySelector(".form-grupo");
 
         localStorage.idUsuario = "usuario";
 
         let campoMensagem = document.querySelector("#campo-mensagem")
         let btEnviarMsg = document.querySelector("#enviar-mensagem");
-        let id = grupo.grupoID;
+
         btEnviarMsg.addEventListener("click", function(a) {
             a.preventDefault();
             let conteudoMensagem = {
